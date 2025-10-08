@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Shield, Zap, Target } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 const HeroSection = () => {
   return (
@@ -47,7 +48,11 @@ const HeroSection = () => {
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center">
         {/* Badge */}
         <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8 animate-fade-in">
-          <Shield className="w-4 h-4 mr-2" />
+          <img 
+            src={logo} 
+            alt="SketchGen Logo" 
+            className="w-4 h-4 mr-2"
+          />
           <span className="text-sm font-medium font-montserrat">Trusted by Law Enforcement</span>
         </div>
 

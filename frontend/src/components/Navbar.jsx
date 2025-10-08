@@ -34,7 +34,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <div className={`rounded-lg p-2 shadow-sm transition-colors duration-300 ${
-              scrolled ? 'bg-blue-600' : 'bg-white'
+              scrolled ? 'bg-transparent' : 'bg-white'
             }`}>
               <img 
                 src={logo} 

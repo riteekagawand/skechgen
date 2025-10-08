@@ -60,7 +60,11 @@ const Generate = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex items-center justify-center mb-6">
             <div className="bg-white/20 rounded-xl p-3 mr-4">
-              <Wand2 className="w-8 h-8" />
+              <img 
+                src={logo} 
+                alt="SketchGen Logo" 
+                className="w-8 h-8"
+              />
             </div>
             <h1 className="text-4xl font-bold font-montserrat">AI Sketch Generator</h1>
           </div>
@@ -297,7 +301,11 @@ const Generate = () => {
                     </div>
                     <div className="bg-gray-100 h-48 rounded-lg flex items-center justify-center">
                       <div className="text-center text-gray-500">
-                        <Scale className="w-12 h-12 mx-auto mb-2 text-gray-400" />
+                        <img 
+                          src={logo} 
+                          alt="SketchGen Logo" 
+                          className="w-12 h-12 mx-auto mb-2 opacity-50"
+                        />
                         <p className="font-montserrat">Generated Sketch Placeholder</p>
                         <p className="text-sm">AI-generated image will appear here</p>
                       </div>
@@ -315,7 +323,11 @@ const Generate = () => {
               </div>
             ) : (
               <div className="text-center py-12 text-gray-500">
-                <Scale className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+                <img 
+                  src={logo} 
+                  alt="SketchGen Logo" 
+                  className="w-16 h-16 mx-auto mb-4 opacity-30"
+                />
                 <p className="text-lg font-montserrat">No sketches generated yet</p>
                 <p className="text-sm">Fill in the description and click "Generate Sketch" to begin</p>
               </div>
