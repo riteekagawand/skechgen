@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight, Shield, Zap, Target } from 'lucide-react';
 
 const HeroSection = () => {
@@ -75,13 +76,13 @@ const HeroSection = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-fade-in">
-          <a
-            href="#generate"
+          <Link
+            to="/generate"
             className="group inline-flex items-center bg-gradient-to-r from-white to-blue-50 text-blue-900 px-8 py-4 rounded-full text-lg font-semibold font-montserrat hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 hover:from-blue-50 hover:to-white hover:shadow-blue-500/25"
           >
             Start Generating
             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-          </a>
+          </Link>
           <a
             href="#about"
             className="inline-flex items-center border-2 border-white/30 text-white px-8 py-4 rounded-full text-lg font-semibold font-montserrat hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm hover:shadow-lg hover:shadow-white/20"

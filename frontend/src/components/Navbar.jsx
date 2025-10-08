@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Scale, Menu, X, Shield } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Menu, X, Shield } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Generate', href: '#generate' },
+    { name: 'Home', href: '/' },
+    { name: 'Generate', href: '/generate' },
     { name: 'About', href: '#about' },
     { name: 'Help', href: '#help' },
     { name: 'Contact', href: '#contact' }
@@ -34,9 +36,11 @@ const Navbar = () => {
             <div className={`rounded-lg p-2 shadow-sm transition-colors duration-300 ${
               scrolled ? 'bg-blue-600' : 'bg-white'
             }`}>
-              <Scale className={`w-6 h-6 transition-colors duration-300 ${
-                scrolled ? 'text-white' : 'text-blue-600'
-              }`} />
+              <img 
+                src={logo} 
+                alt="SketchGen Logo" 
+                className="w-6 h-6"
+              />
             </div>
             <span className={`text-xl font-bold font-montserrat transition-colors duration-300 ${
               scrolled ? 'text-gray-900' : 'text-white'
@@ -49,8 +53,8 @@ const Navbar = () => {
           <ul className="hidden md:flex space-x-8">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <a
-                  href={link.href}
+                <Link
+                  to={link.href}
                   className={`font-medium font-montserrat transition-colors duration-200 relative group ${
                     scrolled 
                       ? 'text-gray-700 hover:text-blue-600' 
@@ -61,15 +65,15 @@ const Navbar = () => {
                   <span className={`absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300 ${
                     scrolled ? 'bg-blue-600' : 'bg-blue-300'
                   } group-hover:w-full`}></span>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
 
           {/* Desktop CTA Button */}
           <div className="hidden md:flex items-center space-x-4">
-            <a
-              href="#generate"
+            <Link
+              to="/generate"
               className={`inline-flex items-center px-6 py-2 rounded-lg font-semibold font-montserrat transition-colors duration-200 shadow-sm hover:shadow-md ${
                 scrolled 
                   ? 'bg-blue-600 text-white hover:bg-blue-700' 
@@ -78,7 +82,7 @@ const Navbar = () => {
             >
               <Shield className="w-4 h-4 mr-2" />
               Get Started
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -112,9 +116,9 @@ const Navbar = () => {
               : 'bg-black/90 backdrop-blur-md border-white/20'
           }`}>
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
+                to={link.href}
                 className={`block px-4 py-3 rounded-lg font-medium font-montserrat transition-all duration-200 ${
                   scrolled 
                     ? 'text-gray-700 hover:text-blue-600 hover:bg-blue-50' 
@@ -123,13 +127,13 @@ const Navbar = () => {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
             <div className={`pt-4 border-t transition-colors duration-300 ${
               scrolled ? 'border-gray-200' : 'border-white/20'
             }`}>
-              <a
-                href="#generate"
+              <Link
+                to="/generate"
                 className={`block px-4 py-3 rounded-lg font-semibold text-center font-montserrat transition-colors duration-200 ${
                   scrolled 
                     ? 'bg-blue-600 text-white hover:bg-blue-700' 
@@ -139,7 +143,7 @@ const Navbar = () => {
               >
                 <Shield className="w-4 h-4 inline mr-2" />
                 Get Started
-              </a>
+              </Link>
             </div>
           </div>
         </div>
