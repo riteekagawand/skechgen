@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Hero from "./home/Hero"
+import Home from "./pages/Home"
 
 function App() {
  
@@ -7,7 +7,7 @@ function App() {
     <Router>
         {/* Define your routes */}
         <Routes>
-          <Route path='/' element={<Hero />} />
+          <Route path='/' element={<Home />} />
         </Routes>
     </Router>
   );
