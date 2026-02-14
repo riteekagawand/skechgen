@@ -1,19 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Shield } from 'lucide-react';
-import logo from '../assets/logo.png';
+import { Menu, X } from 'lucide-react';
+import logo from '../assets/logo1.png';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'Generate', href: '/generate' },
-    { name: 'About', href: '#about' },
-    { name: 'Help', href: '#help' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'About Us', href: '#about' },
+    { name: 'How it Works', href: '#how' },
+    { name: 'Solution', href: '#solution' },
   ];
+
+  const headerRef = useRef(null);
+
+  const handleAnchorClick = (e, href) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    const el = document.querySelector(href);
+    if (el) {
+      const headerHeight = headerRef.current ? headerRef.current.offsetHeight : 80;
+      const top = el.getBoundingClientRect().top + window.pageYOffset - headerHeight - 12; // small gap
+      window.scrollTo({ top, behavior: 'smooth' });
+      // update URL hash without jumping
+      window.history.pushState(null, '', href);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,70 +37,54 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <header ref={headerRef} className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       scrolled 
-        ? 'bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-lg' 
+        ? '' 
         : 'bg-transparent'
     }`}>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+        <div className="flex justify-between items-center h-20">
+          {/* Logo (no rounded background) */}
           <div className="flex items-center space-x-3">
-            <div className={`rounded-lg p-2 shadow-sm transition-colors duration-300 ${
-              scrolled ? 'bg-transparent' : 'bg-white'
-            }`}>
-              <img 
-                src={logo} 
-                alt="SketchGen Logo" 
-                className="w-6 h-6"
-              />
-            </div>
-            <span className={`text-xl font-bold font-montserrat transition-colors duration-300 ${
-              scrolled ? 'text-gray-900' : 'text-white'
-            }`}>
+            <img src={logo} alt="SketchGen Logo" className="w-12 h-12" />
+            <span className={`text-[24px] font-Audiowide transition-colors duration-300 tracking-normal text-white`}>
               SketchGen
             </span>
           </div>
 
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex space-x-8">
+          <ul className="hidden md:flex space-x-8 text-lg">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <Link
-                  to={link.href}
-                  className={`font-medium font-montserrat transition-colors duration-200 relative group ${
-                    scrolled 
-                      ? 'text-gray-700 hover:text-blue-600' 
-                      : 'text-white hover:text-blue-300'
-                  }`}
+                <a
+                  href={link.href}
+                  onClick={(e) => handleAnchorClick(e, link.href)}
+                  className={`font-medium font-montserrat transition-colors duration-200 relative group text-white hover:text-blue-300`}
                 >
                   {link.name}
-                  <span className={`absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300 ${
-                    scrolled ? 'bg-blue-600' : 'bg-blue-300'
-                  } group-hover:w-full`}></span>
-                </Link>
+                  <span className={`absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300 bg-blue-300 group-hover:w-full`}></span>
+                </a>
               </li>
             ))}
           </ul>
 
-          {/* Desktop CTA Button */}
+          {/* Desktop Login Button */}
           <div className="hidden md:flex items-center space-x-4">
             <Link
-              to="/generate"
-              className={`inline-flex items-center px-6 py-2 rounded-lg font-semibold font-montserrat transition-colors duration-200 shadow-sm hover:shadow-md ${
+              to="/login"
+              className={`inline-flex items-center px-5 py-3 rounded-full text-lg font-semibold font-montserrat transition-colors duration-200 shadow-lg ${
                 scrolled 
-                  ? 'bg-blue-600 text-white hover:bg-blue-700' 
-                  : 'bg-white text-blue-600 hover:bg-blue-50'
+                  ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' 
+                  : 'bg-gradient-to-r from-purple-600 to-pink-500 text-white'
               }`}
             >
-              <Shield className="w-4 h-4 mr-2" />
-              Get Started
+              Login
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
+            className={`md:hidden p-3 rounded-lg transition-colors duration-200 ${
               scrolled 
                 ? 'hover:bg-gray-100' 
                 : 'hover:bg-white/10'
@@ -95,13 +92,9 @@ const Navbar = () => {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
-              <X className={`w-6 h-6 transition-colors duration-300 ${
-                scrolled ? 'text-gray-700' : 'text-white'
-              }`} />
+              <X className={`w-7 h-7 transition-colors duration-300 text-white`} />
             ) : (
-              <Menu className={`w-6 h-6 transition-colors duration-300 ${
-                scrolled ? 'text-gray-700' : 'text-white'
-              }`} />
+              <Menu className={`w-7 h-7 transition-colors duration-300 text-white`} />
             )}
           </button>
         </div>
@@ -110,40 +103,35 @@ const Navbar = () => {
         <div className={`md:hidden transition-all duration-300 overflow-hidden ${
           mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}>
-          <div className={`py-4 space-y-2 border-t transition-colors duration-300 ${
+            <div className={`py-4 space-y-2 border-t transition-colors duration-300 ${
             scrolled 
               ? 'bg-white border-gray-200' 
               : 'bg-black/90 backdrop-blur-md border-white/20'
           }`}>
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.name}
-                to={link.href}
-                className={`block px-4 py-3 rounded-lg font-medium font-montserrat transition-all duration-200 ${
-                  scrolled 
-                    ? 'text-gray-700 hover:text-blue-600 hover:bg-blue-50' 
-                    : 'text-white hover:text-blue-300 hover:bg-white/10'
-                }`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
+                href={link.href}
+                onClick={(e) => handleAnchorClick(e, link.href)}
+                className={`block px-4 py-3 rounded-lg font-medium font-montserrat transition-all duration-200 text-white hover:text-blue-300 hover:bg-white/10`}
+                >
                 {link.name}
-              </Link>
+              </a>
             ))}
             <div className={`pt-4 border-t transition-colors duration-300 ${
               scrolled ? 'border-gray-200' : 'border-white/20'
             }`}>
-              <Link
-                to="/generate"
+              <a
+                href="#login"
                 className={`block px-4 py-3 rounded-lg font-semibold text-center font-montserrat transition-colors duration-200 ${
                   scrolled 
-                    ? 'bg-blue-600 text-white hover:bg-blue-700' 
-                    : 'bg-white text-blue-600 hover:bg-blue-50'
+                    ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' 
+                    : 'bg-gradient-to-r from-purple-600 to-pink-500 text-white'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <Shield className="w-4 h-4 inline mr-2" />
-                Get Started
-              </Link>
+                Login
+              </a>
             </div>
           </div>
         </div>

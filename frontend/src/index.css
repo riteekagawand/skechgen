@@ -1,4 +1,94 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+  Alexandria font-face declarations.
+  NOTE: Alexandria is a licensed font. Place your Alexandria .woff2 files in the project's
+  `public/fonts/` directory (create it if missing) and name them as shown below.
+
+  Example (place files in `frontend/public/fonts/`):
+    - frontend/public/fonts/Alexandria-Regular.woff2
+    - frontend/public/fonts/Alexandria-Bold.woff2
+
+  When the files exist, the site will load the Alexandria font. If they are not present,
+  the CSS will fall back to system sans-serif fonts.
+*/
+@font-face {
+  font-family: 'Alexandria';
+  src: url('/fonts/Alexandria-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alexandria';
+  src: url('/fonts/Alexandria-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Utility to apply Audiowide where needed */
+.font-audiowide { font-family: 'Audiowide', cursive; }
+
+/* Alexandria fallback utility: Alexandria is a paid font and may not be available via Google Fonts.
+  If you have the font files, add them to the project and declare @font-face. Otherwise this rule
+  provides a sensible sans-serif fallback. */
+.font-alexandria { font-family: 'Alexandria', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-weight: 700; }
+
+/* Apply Alexandria as the default site font (falls back to system sans-serif).
+   If you have the Alexandria font files (woff/woff2), add them with @font-face above.
+   Example:
+   @font-face {
+     font-family: 'Alexandria';
+     src: url('/fonts/Alexandria-Regular.woff2') format('woff2');
+     font-weight: 400;
+     font-style: normal;
+     font-display: swap;
+   }
+*/
+
+html, body, #root {
+  font-family: 'Alexandria', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Ensure any utility classes that referenced other families use Alexandria instead */
+.font-montserrat { font-family: 'Alexandria', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important; }
+.font-audiowide { font-family: 'Alexandria', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important; }
+
+/* Bottom glow visibility: hidden by default (so hero doesn't show it). When the page
+  adds the `show-about-glow` class to <html> the glow fades in (visible for About section). */
+.bottom-glow { opacity: 0; transition: opacity 500ms ease; }
+.show-about-glow .bottom-glow { opacity: 0.45; }
+
+html {
+    scroll-behavior: smooth;
+  }
+
+/* Prevent horizontal scroll caused by large absolute background elements */
+html, body, #root {
+  overflow-x: hidden;
+}
+  
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 2px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: var(--background-color);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #634aff;
+    border-radius: 20px;
+  }
+  
+  *::selection {
+    background-color: #634aff;
+  }
+  

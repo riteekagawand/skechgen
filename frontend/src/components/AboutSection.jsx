@@ -1,54 +1,76 @@
-import React from 'react';
-import { Zap, Target, Shield } from 'lucide-react';
+import React from "react";
+import { Sparkles, Cpu, Sliders, Image as ImageIcon } from "lucide-react";
 
 const AboutSection = () => {
   const features = [
     {
-      icon: <Zap className="w-8 h-8" />,
-      title: "Fast Suspect Generation",
-      description: "Generate high-quality suspect sketches in under 5 minutes. Our streamlined interface allows officers to input witness descriptions quickly and efficiently, accelerating investigation timelines without compromising accuracy."
+      icon: <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-sky-400" />,
+      title: "Prompt-Based Generation",
+      description:
+        "Transform detailed text descriptions into realistic human faces using advanced AI models."
     },
     {
-      icon: <Target className="w-8 h-8" />,
-      title: "Forensic-Grade Accuracy",
-      description: "Built on validated forensic principles and trained with law enforcement input. Our AI models produce sketches that meet the standards required for criminal investigations and court proceedings."
+      icon: <Cpu className="w-8 h-8 md:w-10 md:h-10 text-sky-400" />,
+      title: "Deep Learning Powered",
+      description:
+        "Built using diffusion models and LoRA fine-tuning to generate high-quality, photorealistic results."
     },
     {
-      icon: <Shield className="w-8 h-8" />,
-      title: "Bias-Aware AI",
-      description: "Rigorously tested for fairness across demographics. Our bias detection systems ensure equitable results, maintaining the integrity of investigations while respecting civil liberties and constitutional rights."
+      icon: <Sliders className="w-8 h-8 md:w-10 md:h-10 text-sky-400" />,
+      title: "Customizable Attributes",
+      description:
+        "Control age, gender, hairstyle, lighting, and facial features directly through text prompts."
+    },
+    {
+      icon: <ImageIcon className="w-8 h-8 md:w-10 md:h-10 text-sky-400" />,
+      title: "High-Resolution Output",
+      description:
+        "Generate sharp 512x512 (or higher) resolution faces suitable for research and creative applications."
     }
   ];
 
   return (
-    <section id="about" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-      <div className="text-center mb-16">
-        <h2 className="text-3xl sm:text-4xl font-bold text-blue-900 mb-4">
-          Trusted by Law Enforcement Nationwide
-        </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          SketchGen combines cutting-edge artificial intelligence with forensic expertise to deliver reliable, unbiased suspect identification tools.
-        </p>
-      </div>
-
-      {/* Feature Cards */}
-      <div className="grid md:grid-cols-3 gap-8">
-        {features.map((feature, index) => (
-          <div
-            key={index}
-            className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-blue-700"
-          >
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-blue-700 rounded-xl flex items-center justify-center text-white mb-6">
-              {feature.icon}
-            </div>
-            <h3 className="text-2xl font-bold text-blue-900 mb-4">
-              {feature.title}
-            </h3>
-            <p className="text-gray-600 leading-relaxed">
-              {feature.description}
-            </p>
+    <section id="about" className="relative py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div
+          className="relative z-10 rounded-3xl p-10 md:p-16 backdrop-blur-sm border border-white/5"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(245,245,245,0.03) 40%, rgba(230,230,230,0.06) 100%)",
+            backdropFilter: "saturate(120%)"
+          }}
+        >
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white">
+              Why Choose SketchGen
+              <br />
+              for AI Face Generation?
+            </h2>
           </div>
-        ))}
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {features.map((f, i) => (
+              <div
+                key={i}
+                className="p-6 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-lg">
+                    {f.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-white mb-2">
+                      {f.title}
+                    </h3>
+                    <p className="text-sm text-white/75 leading-relaxed">
+                      {f.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
