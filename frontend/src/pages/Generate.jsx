@@ -1,17 +1,24 @@
 import React, { useState } from "react";
-import { Wand2, Loader2, ImageIcon } from "lucide-react";
+import { Wand2, Loader2, ImageIcon, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo1.png";
+import WitnessMemoryAssistant from "../components/WitnessMemoryAssistant";
 
 const Generate = () => {
   const [description, setDescription] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isAssistantOpen, setIsAssistantOpen] = useState(false);
 
   const handleGenerate = () => {
     setIsGenerating(true);
     setTimeout(() => {
       setIsGenerating(false);
     }, 3000);
+  };
+
+  const handlePromptGenerated = (generatedPrompt) => {
+    setDescription(generatedPrompt);
+    setIsAssistantOpen(false); // Close the modal
   };
 
   return (
@@ -51,11 +58,29 @@ const Generate = () => {
               Enter a detailed description and let our AI generate a realistic face.
             </p>
 
+            {/* Witness Assistant Button */}
+            <button
+              onClick={() => setIsAssistantOpen(true)}
+              className="w-full mb-4 flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-purple-500/30 bg-purple-500/10 text-purple-400 hover:bg-purple-500/20 transition-all"
+            >
+              <MessageSquare className="w-4 h-4" />
+              Use Witness Memory Assistant
+            </button>
+
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Example: 25 year old woman, short black hair, soft lighting, studio portrait..."
               className="w-full h-32 bg-black/40 border border-white/20 rounded-xl p-4 text-white placeholder:text-white/40 focus:outline-none focus:ring-1 focus:ring-purple-400 resize-none"
+            />
+
+            {/* Witness Memory Assistant Modal */}
+            <WitnessMemoryAssistant
+              isOpen={isAssistantOpen}
+              onClose={() => setIsAssistantOpen(false)}
+              onPromptGenerated={handlePromptGenerated}
+              isGenerating={isGenerating}
+              setIsGenerating={setIsGenerating}
             />
 
             <button

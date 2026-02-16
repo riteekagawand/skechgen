@@ -1,9 +1,12 @@
 import React from 'react';
 
-const Background = () => {
+const Background = ({ isDimmed = false }) => {
   return (
     // Background should sit behind content; give it a low z-index
-    <div aria-hidden className="fixed inset-0 pointer-events-none z-0 bg-black">
+    <div 
+      aria-hidden 
+      className={`fixed inset-0 pointer-events-none z-0 bg-black transition-opacity duration-500 ${isDimmed ? 'opacity-0' : 'opacity-100'}`}
+    >
       {/* Left soft glow (softened) */}
       <div
         className="absolute -left-40 top-24 w-[60rem] h-[60rem] rounded-full"
